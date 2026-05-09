@@ -15,6 +15,7 @@ const rooms = [
     image: "/images/room%20kudil.jpeg",
     tag: "Signature",
     tagColor: "#8b6914",
+    tagBg: "#f0e8d8",
   },
   {
     id: 2,
@@ -31,6 +32,7 @@ const rooms = [
     image: "/images/room%20family.jpeg",
     tag: "Group Favourite",
     tagColor: "#3d5a3e",
+    tagBg: "#ddeede",
   },
   {
     id: 3,
@@ -47,7 +49,8 @@ const rooms = [
     ],
     image: "/images/room%20double.jpeg",
     tag: "3 Rooms",
-    tagColor: "#c4a882",
+    tagColor: "#7a5c2e",
+    tagBg: "#f0e8d8",
   },
 ];
 
@@ -76,28 +79,32 @@ export default function Rooms() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-0.5">
+        <div className="grid md:grid-cols-3 gap-6">
           {rooms.map((room) => (
-            <div key={room.id} className="group relative overflow-hidden bg-[#1a160e]">
-              {/* Image */}
-              <div className="aspect-[3/4] overflow-hidden">
+            <div key={room.id} className="group flex flex-col bg-[#1a160e] overflow-hidden">
+
+              {/* Image — top portion */}
+              <div className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
                 <img
                   src={room.image}
                   alt={room.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80 group-hover:opacity-90"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                {/* Tag */}
+                <div
+                  className="absolute top-4 left-4 px-3 py-1 text-xs tracking-[0.2em] uppercase font-medium"
+                  style={{
+                    backgroundColor: room.tagBg,
+                    color: room.tagColor,
+                    fontFamily: "'Inter', sans-serif",
+                  }}
+                >
+                  {room.tag}
+                </div>
               </div>
 
-              {/* Tag */}
-              <div
-                className="absolute top-4 left-4 px-3 py-1 text-white text-xs tracking-[0.2em] uppercase"
-                style={{ backgroundColor: room.tagColor, fontFamily: "'Inter', sans-serif" }}
-              >
-                {room.tag}
-              </div>
-
-              {/* Overlay content */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6">
+              {/* Text panel — below image on solid background */}
+              <div className="flex flex-col flex-1 p-6 bg-[#221d13]">
                 <h3
                   className="text-2xl font-light text-white mb-1"
                   style={{ fontFamily: "'Cormorant Garamond', serif" }}
@@ -111,24 +118,28 @@ export default function Rooms() {
                   {room.subtitle}
                 </p>
                 <p
-                  className="text-xs text-white/70 mb-4 leading-relaxed"
+                  className="text-xs text-[#a89880] mb-5 leading-relaxed"
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   Best for: {room.bestFor}
                 </p>
-                <ul className="space-y-1">
-                  {room.features.map((f) => (
-                    <li
-                      key={f}
-                      className="text-xs text-white/60 flex items-center gap-2"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                    >
-                      <span className="w-1 h-1 bg-[#c4a882] rounded-full flex-shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+
+                <div className="border-t border-[#3d3020] pt-5 mt-auto">
+                  <ul className="space-y-2">
+                    {room.features.map((f) => (
+                      <li
+                        key={f}
+                        className="text-xs text-[#c4a882]/80 flex items-center gap-2"
+                        style={{ fontFamily: "'Inter', sans-serif" }}
+                      >
+                        <span className="w-1 h-1 bg-[#c4a882] rounded-full flex-shrink-0" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
+
             </div>
           ))}
         </div>

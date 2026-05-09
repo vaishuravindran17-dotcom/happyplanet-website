@@ -47,8 +47,9 @@ export default function Hero() {
         />
       ))}
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* Overlay — layered gradient for strong text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/20" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 text-white">
