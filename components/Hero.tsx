@@ -1,58 +1,71 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const slides = [
-  {
-    url: "/images/home1%20.jpeg",
-    alt: "Happy Planet Farmstay",
-  },
-  {
-    url: "/images/home%202.jpeg",
-    alt: "Lush farmland at Happy Planet",
-  },
-  {
-    url: "/images/home%203.jpeg",
-    alt: "Farm life at Happy Planet",
-  },
-  {
-    url: "/images/home%204.jpeg",
-    alt: "Peaceful surroundings at Happy Planet",
-  },
+  { src: "/images/home1%20.jpeg", alt: "Happy Planet Farmstay" },
+  { src: "/images/home%202.jpeg", alt: "Lush farmland at Happy Planet" },
+  { src: "/images/home%203.jpeg", alt: "Farm life at Happy Planet" },
+  { src: "/images/home%204.jpeg", alt: "Peaceful surroundings at Happy Planet" },
 ];
+
+// Tiny earthy gradient SVG — shown instantly while real image loads
+const BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjM2Q1YTNlIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMmMyNDE2Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSJ1cmwoI2cpIi8+PC9zdmc+";
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
+  // Track which slides have been reached so we only load them progressively
+  const [revealed, setRevealed] = useState<Set<number>>(new Set([0]));
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
+      setCurrent((prev) => {
+        const next = (prev + 1) % slides.length;
+        setRevealed((r) => new Set([...r, next]));
+        return next;
+      });
     }, 5000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <section id="home" className="relative h-screen min-h-[600px] overflow-hidden">
-      {/* Slides */}
       {slides.map((slide, i) => (
         <div
           key={i}
           className="hero-slide"
-          style={{
-            backgroundImage: `url(${slide.url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: i === current ? 1 : 0,
-          }}
+          style={{ opacity: i === current ? 1 : 0 }}
           aria-hidden={i !== current}
-        />
+        >
+          {/* Only mount the Image once the slide has been reached (Option D) */}
+          {revealed.has(i) && (
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              className="object-cover"
+              // First slide loads eagerly with highest priority (Option B)
+              priority={i === 0}
+              // Slides 2-4 load lazily in the background (Option D)
+              loading={i === 0 ? "eager" : "lazy"}
+              // Show earthy gradient until real image is ready (Option C)
+              placeholder="blur"
+              blurDataURL={BLUR_DATA_URL}
+              // Serve the right resolution per viewport (Option B)
+              sizes="100vw"
+              quality={80}
+            />
+          )}
+        </div>
       ))}
 
-      {/* Overlay — layered gradient for strong text contrast */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/20" />
+      {/* Layered gradient for text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30 z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/20 z-10" />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 text-white">
+      <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-6 text-white">
         <p
           className="text-xs tracking-[0.4em] uppercase text-[#c4a882] mb-6"
           style={{ fontFamily: "'Inter', sans-serif" }}
@@ -97,13 +110,16 @@ export default function Hero() {
       </div>
 
       {/* Slide dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
         {slides.map((_, i) => (
           <button
             key={i}
-            onClick={() => setCurrent(i)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              i === current ? "bg-white w-6" : "bg-white/40"
+            onClick={() => {
+              setRevealed((r) => new Set([...r, i]));
+              setCurrent(i);
+            }}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              i === current ? "bg-white w-6" : "bg-white/40 w-2"
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />
@@ -111,7 +127,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 right-8 z-10 flex flex-col items-center gap-2">
+      <div className="absolute bottom-8 right-8 z-20 flex flex-col items-center gap-2">
         <span
           className="text-white/60 text-xs tracking-[0.25em] uppercase"
           style={{ fontFamily: "'Inter', sans-serif" }}
