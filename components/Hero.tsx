@@ -3,20 +3,20 @@ import { useState, useEffect } from "react";
 
 const slides = [
   {
-    url: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1600&q=80",
-    alt: "Lush green farmland at dawn",
+    url: "/images/home1%20.jpeg",
+    alt: "Happy Planet Farmstay",
   },
   {
-    url: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1600&q=80",
-    alt: "Misty countryside landscape",
+    url: "/images/home%202.jpeg",
+    alt: "Lush farmland at Happy Planet",
   },
   {
-    url: "https://images.unsplash.com/photo-1414016642750-7fdd78dc33d9?w=1600&q=80",
-    alt: "Traditional farmhouse at sunset",
+    url: "/images/home%203.jpeg",
+    alt: "Farm life at Happy Planet",
   },
   {
-    url: "https://images.unsplash.com/photo-1475823678248-624fc6f85785?w=1600&q=80",
-    alt: "Peaceful farmstay environment",
+    url: "/images/home%204.jpeg",
+    alt: "Peaceful surroundings at Happy Planet",
   },
 ];
 

@@ -61,7 +61,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="tel:+919876543210"
+            href="tel:+919944331313"
             className="bg-[#3d5a3e] text-white text-xs tracking-[0.15em] uppercase px-5 py-2.5 hover:bg-[#2c4a2d] transition-colors"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
@@ -98,7 +98,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="tel:+919876543210"
+            href="tel:+919944331313"
             className="bg-[#3d5a3e] text-white text-xs tracking-[0.15em] uppercase px-5 py-2.5 text-center hover:bg-[#2c4a2d] transition-colors"
           >
             Book Now

@@ -35,8 +35,8 @@ export default function About() {
           <div className="space-y-4">
             <div className="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80"
-                alt="Farm landscape"
+                src="/images/About.jpeg"
+                alt="Happy Planet Farm"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>

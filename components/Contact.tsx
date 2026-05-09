@@ -1,3 +1,14 @@
+const AIRBNB_LINKS = [
+  {
+    label: "Book Room 1 on Airbnb",
+    url: "https://www.airbnb.co.in/rooms/39516063?source_impression_id=p3_1778338929_P3b4wykn1XZxAkwu",
+  },
+  {
+    label: "Book Room 2 on Airbnb",
+    url: "https://www.airbnb.co.in/rooms/914472374713076008?source_impression_id=p3_1778338928_P3G59icQKpjhhhKr",
+  },
+];
+
 export default function Contact() {
   return (
     <section id="contact" className="py-24 bg-[#f8f4ef]">
@@ -57,41 +68,30 @@ export default function Contact() {
                   >
                     Phone / WhatsApp
                   </p>
-                  <a
-                    href="tel:+919876543210"
-                    className="text-[#2c2416] hover:text-[#3d5a3e] transition-colors"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    +91 98765 43210
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-[#3d5a3e] flex items-center justify-center flex-shrink-0">
-                  <span className="text-white text-sm">✉️</span>
-                </div>
-                <div>
-                  <p
-                    className="text-xs tracking-[0.2em] uppercase text-[#8b6914] mb-1"
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                  >
-                    Email
-                  </p>
-                  <a
-                    href="mailto:stay@happyplanetfarm.com"
-                    className="text-[#2c2416] hover:text-[#3d5a3e] transition-colors"
-                    style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                  >
-                    stay@happyplanetfarm.com
-                  </a>
+                  <div className="flex flex-col gap-1">
+                    <a
+                      href="tel:+919944331313"
+                      className="text-[#2c2416] hover:text-[#3d5a3e] transition-colors"
+                      style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                    >
+                      +91 99443 31313
+                    </a>
+                    <a
+                      href="tel:+919597664743"
+                      className="text-[#2c2416] hover:text-[#3d5a3e] transition-colors"
+                      style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                    >
+                      +91 95976 64743
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 flex gap-4">
+            {/* CTA buttons */}
+            <div className="mt-10 flex flex-wrap gap-4">
               <a
-                href="https://wa.me/919876543210?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20a%20stay%20at%20Happy%20Planet%20Farmstay."
+                href="https://wa.me/919944331313?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20a%20stay%20at%20Happy%20Planet%20Farmstay."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 hover:bg-[#1ebe58] transition-colors"
@@ -103,21 +103,55 @@ export default function Contact() {
                 WhatsApp Us
               </a>
               <a
-                href="tel:+919876543210"
+                href="tel:+919944331313"
                 className="flex items-center gap-2 border border-[#3d5a3e] text-[#3d5a3e] px-6 py-3 hover:bg-[#3d5a3e] hover:text-white transition-colors"
                 style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.8rem", letterSpacing: "0.1em" }}
               >
                 Call Now
               </a>
             </div>
+
+            {/* Airbnb booking */}
+            <div className="mt-10">
+              <p
+                className="text-xs tracking-[0.35em] uppercase text-[#8b6914] mb-4"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                Book Directly on Airbnb
+              </p>
+              <div className="flex flex-col gap-3">
+                {AIRBNB_LINKS.map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 border border-[#e8e0d5] px-5 py-3 hover:border-[#ff5a5f] hover:text-[#ff5a5f] transition-colors group"
+                  >
+                    <svg className="w-5 h-5 text-[#ff5a5f] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 4.5c1.24 0 2.25 1.01 2.25 2.25S13.24 9 12 9 9.75 7.99 9.75 6.75 10.76 4.5 12 4.5zM18 18H6v-1.5c0-2 4-3.1 6-3.1s6 1.1 6 3.1V18z" />
+                    </svg>
+                    <span
+                      className="text-sm text-[#2c2416] group-hover:text-[#ff5a5f] transition-colors"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                    >
+                      {link.label}
+                    </span>
+                    <svg className="w-4 h-4 ml-auto text-[#c4a882] group-hover:text-[#ff5a5f] transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Map placeholder / image */}
+          {/* Image + check-in info */}
           <div className="space-y-6">
             <div className="aspect-square bg-[#e8e0d5] flex items-center justify-center overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1533086881232-f9e60b3a21b7?w=800&q=80"
-                alt="Farm at sunset"
+                src="/images/contact.jpeg"
+                alt="Happy Planet Farm"
                 className="w-full h-full object-cover"
               />
             </div>

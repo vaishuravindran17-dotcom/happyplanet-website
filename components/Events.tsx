@@ -97,7 +97,7 @@ export default function Events() {
           <div className="space-y-8">
             <div className="aspect-[4/3] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80"
+                src="/images/events.jpeg"
                 alt="Celebration at Happy Planet"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />

@@ -85,8 +85,8 @@ export default function Retreats() {
           <div className="space-y-6">
             <div className="aspect-[3/4] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80"
-                alt="Wellness retreat"
+                src="/images/retreats.jpeg"
+                alt="Retreats at Happy Planet"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
